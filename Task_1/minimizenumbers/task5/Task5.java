@@ -2,43 +2,40 @@
 package task5;
 import java.util.Scanner;
 public class Task5 {
-
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        int n = scanner.nextInt();
-        int[] arr = new int[n];
-
-       
-        for (int i = 0; i < n; i++) {
-            arr[i] = scanner.nextInt();
+ public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+        int x = scanner.nextInt();
+        int[] A = new int[x];
+ 
+        for (int i = 0; i < x; i++) {
+            A[i] = scanner.nextInt();
         }
-
-        int operations = 0;
-        boolean allEven = true;
-
-        for (int i = 0; i < n; i++) {
-            if (arr[i] % 2 != 0) {
-                allEven = false;
-                break;
-            }
-        }
-
-        while (allEven) {
-            operations++;
-            for (int i = 0; i < n; i++) {
-                arr[i] /= 2;
-                if (arr[i] % 2 != 0) {
-                    allEven = false;
-                    break;
-                }
-            }
-        }
-
-        System.out.println(operations - 1); 
-
+        int maxOperations = calculateMaxOperations(x, A);
+        System.out.println(maxOperations);
         scanner.close();
     }
+ 
+    private static int calculateMaxOperations(int x, int[] A) {
+        int maxOperations = 0;
+        while (areAllEven(A)) {
+            for (int i = 0; i < x; i++) {
+                A[i] /= 2;
+            }
+            maxOperations++;
+        }
+ 
+        return maxOperations;
+    }
+ 
+    private static boolean areAllEven(int[] array) {
+        for (int num : array) {
+            if (num % 2 != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
+    
+       
 
