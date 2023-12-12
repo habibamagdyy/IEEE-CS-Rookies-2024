@@ -6,26 +6,21 @@ public class Task7 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt(); // Number of elements in the arrays
-        int[] A = new int[n];
-        int[] B = new int[n];
+        int n = scanner.nextInt(); 
+        int[] w = new int[n];
+        int[] x = new int[n];
 
-        // Input array A
         for (int i = 0; i < n; i++) {
-            A[i] = scanner.nextInt();
+            w[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < n; i++) {
+            x[i] = scanner.nextInt();
         }
 
-        // Input array B
-        for (int i = 0; i < n; i++) {
-            B[i] = scanner.nextInt();
-        }
+        Arrays.sort(w);
+        Arrays.sort(x);
 
-        // Sort both arrays
-        Arrays.sort(A);
-        Arrays.sort(B);
-
-        // Check if B is a permutation of A
-        boolean isPermutation = Arrays.equals(A, B);
+        boolean isPermutation = Arrays.equals(w, x);
 
         if (isPermutation) {
             System.out.println("yes");
