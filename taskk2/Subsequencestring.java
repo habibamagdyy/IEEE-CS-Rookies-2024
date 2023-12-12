@@ -14,17 +14,17 @@ public class Subsequencestring {
         scanner.close();
     }
 
-    private static boolean isSubsequence(String str, String target) {
+    private static boolean isSubsequence(String str, String wanted) {
         int i = 0, j = 0;
 
-        while (i < str.length() && j < target.length()) {
-            if (str.charAt(i) == target.charAt(j)) {
+        while (i < str.length() && j < wanted.length()) {
+            if (str.charAt(i) == wanted.charAt(j)) {
                 j++;
             }
             i++;
         }
 
-        return j == target.length();
+        return j == wanted.length();
    }
 
 }
