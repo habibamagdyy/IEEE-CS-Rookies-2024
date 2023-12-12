@@ -4,84 +4,105 @@ import java.util.Scanner;
 public class Fiveinone {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
         int[] A = new int[N];
+
         for (int i = 0; i < N; i++) {
             A[i] = scanner.nextInt();
         }
-        System.out.println("The maximum number : " + getMax(A));
-        System.out.println("The minimum number : " + getMin(A));
+        System.out.println("The max number : " + getMaxNumber(A));
+        System.out.println("The min number : " + getMinNumber(A));
         System.out.println("The number of prime numbers : " + countPrimes(A));
         System.out.println("The number of palindrome numbers : " + countPalindromes(A));
-        System.out.println("The number that has the maximum number of divisors : " + maxDivisorsNumber(A));
+        System.out.println("The number that has the max number of divisors : " + getMaxDivisorNumber(A));
+
+        scanner.close();
     }
-    static int getMax(int[] A) {
-        int max = A[0];
-        for (int num : A) {
+
+    private static int getMaxNumber(int[] array) {
+        int max = array[0];
+        for (int num : array) {
             if (num > max) {
                 max = num;
             }
         }
         return max;
     }
-    static int getMin(int[] A) {
-        int min = A[0];
-        for (int num : A) {
+
+    private static int getMinNumber(int[] array) {
+        int min = array[0];
+        for (int num : array) {
             if (num < min) {
                 min = num;
             }
         }
         return min;
     }
-    static int countPrimes(int[] A) {
+
+    private static int countPrimes(int[] array) {
         int count = 0;
-        for (int num : A) {
+        for (int num : array) {
             if (isPrime(num)) {
                 count++;
             }
         }
         return count;
     }
-    static int countPalindromes(int[] A) {
+
+    private static int countPalindromes(int[] array) {
         int count = 0;
-        for (int num : A) {
+        for (int num : array) {
             if (isPalindrome(num)) {
                 count++;
             }
         }
         return count;
     }
-    static int maxDivisorsNumber(int[] A) {
-        int maxDivisors = 0;
-        int maxDivisorsNumber = A[0];
 
-        for (int num : A) {
-            int divisorsCount = countDivisors(num);
-            if (divisorsCount > maxDivisors) {
-                maxDivisors = divisorsCount;
-                maxDivisorsNumber = num;
+    private static int getMaxDivisorNumber(int[] array) {
+        int maxDivisors = 0;
+        int result = array[0];
+
+        for (int num : array) {
+            int divisors = countDivisors(num);
+            if (divisors > maxDivisors) {
+                maxDivisors = divisors;
+                result = num;
+            } else if (divisors == maxDivisors && num > result) {
+                result = num;
             }
         }
 
-        return maxDivisorsNumber;
+        return result;
     }
-    static boolean isPrime(int num) {
-        if (num <= 1) {
+
+    private static boolean isPrime(int num) {
+        if (num < 2) {
             return false;
         }
-        for (int i = 2; i * i <= num; i++) {
+        for (int i = 2; i <= Math.sqrt(num); i++) {
             if (num % i == 0) {
                 return false;
             }
         }
         return true;
     }
-    static boolean isPalindrome(int num) {
-        String str = Integer.toString(num);
-        return str.equals(new StringBuilder(str).reverse().toString());
+
+    private static boolean isPalindrome(int num) {
+        int original = num;
+        int reversed = 0;
+
+        while (num > 0) {
+            int digit = num % 10;
+            reversed = reversed * 10 + digit;
+            num /= 10;
+        }
+
+        return original == reversed;
     }
-    static int countDivisors(int num) {
+
+    private static int countDivisors(int num) {
         int count = 0;
         for (int i = 1; i <= num; i++) {
             if (num % i == 0) {
@@ -90,4 +111,5 @@ public class Fiveinone {
         }
         return count;
     }
+}
 }
