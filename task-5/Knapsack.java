@@ -7,7 +7,7 @@ public class Knapsack {
         int n = scanner.nextInt();
         int w = scanner.nextInt(); 
         if (n < 1 || n > 20 || w < 1 || w > 100) {
-            System.out.println("Please enter valid input values.");
+            System.out.println("enter valid inputs.");
             return;
         }
 
